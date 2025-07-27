@@ -1,8 +1,13 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie(std::string name)
+void Zombie::setName(std::string name) 
 {
     this->name = name;
+}
+
+std::string Zombie::getName()
+{
+    return this->name;
 }
 
 void Zombie::Announce(void)
@@ -12,5 +17,5 @@ void Zombie::Announce(void)
 
 Zombie::~Zombie()
 {
-    std::cout<<this->name<<" has been destroyed."<<std::endl;
+    std::cout<<this->getName()<<" Destroyed."<<std::endl;
 }
