@@ -1,5 +1,5 @@
 CXX     = c++
-CXXFLAGS=  -std=c++98
+CXXFLAGS=  -Wall -Wextra -Werror -std=c++98
 
 NAME    = ViolenceeeE
 SRCS    = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
