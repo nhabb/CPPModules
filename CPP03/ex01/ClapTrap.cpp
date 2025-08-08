@@ -33,7 +33,6 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &obj)
     {
         this->name = obj.name;
         this->hp = obj.hp;
-        this->ep = obj.ep;
         this->attDamage = obj.attDamage;
     }
     return *this;
