@@ -15,6 +15,7 @@ Cat::~Cat()
 
 Cat::Cat(const Cat &obj) 
 {
+    this->brain = new Brain(*obj.brain);
     *this = obj;
 }
 

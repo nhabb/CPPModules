@@ -11,7 +11,7 @@ int main()
     delete j;//should not create a leak
     delete i;
 
-    //My tests
+    // My tests
     Animal *animal[10];
     for (int i = 0; i < 5; i++)
     {

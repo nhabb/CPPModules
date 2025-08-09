@@ -15,6 +15,7 @@ Dog::~Dog()
 
 Dog::Dog(const Dog &obj) 
 {
+    this->brain = new Brain(*obj.brain);
     *this = obj;
 }
 
