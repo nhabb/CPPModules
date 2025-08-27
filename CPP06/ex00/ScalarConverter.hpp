@@ -3,10 +3,10 @@
 #include <iostream>
 #include <string>
 
-class ScalarCoverter
+class ScalarConverter
 {
     private:
-        ScalarCoverter();
+        ScalarConverter();
 
     public:
         static void convert(std::string str);
