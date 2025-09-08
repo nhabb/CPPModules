@@ -19,13 +19,12 @@ int main()
     std::cout << f3;
     std::cout << f4;
 
-    // Tests
-    f1.signForm(f1, b1);  // should sign
-    f2.signForm(f2, b1);  // grade too low
-    f3.signForm(f3, b3);  // lowest grade, should work
-    f4.signForm(f4, b3);  // too low for a top requirement
-    f4.signForm(f4, b2);  // should work with top bureaucrat
-    f1.signForm(f1, b4);  // borderline case
+    f1.signForm(b1);
+    f2.signForm(b1);
+    f3.signForm(b3);
+    f4.signForm(b3);
+    f4.signForm(b2);
+    f1.signForm(b4);
 
     return 0;
 }

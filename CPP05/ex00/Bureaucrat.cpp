@@ -1,5 +1,21 @@
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat(): name("def"), grade(0){}
+Bureaucrat::~Bureaucrat(){}
+Bureaucrat::Bureaucrat(const Bureaucrat &obj)
+{
+    name = obj.name;
+    grade = obj.grade;
+}
+Bureaucrat & Bureaucrat::operator=(const Bureaucrat &obj)
+{
+    if (this != &obj)
+    {
+        *this = obj;
+    }
+    return *this;
+}
+
 Bureaucrat::Bureaucrat(std::string name,int grade)
 {
     if (grade < 1)
