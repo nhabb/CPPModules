@@ -1,70 +1,50 @@
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
-AForm::AForm() : name("def") ,isSigned(false),gradeToSign(150) ,gradeToExecute(150){}
-AForm::~AForm(){}
+AForm::AForm()
+    : name("Default"), isSigned(false), gradeToSign(150), gradeToExecute(150) {}
 
-AForm &AForm::operator=(const AForm &obj)
-{
+AForm::~AForm() {}
+
+AForm::AForm(const AForm &obj)
+    : name(obj.name), isSigned(obj.isSigned),
+      gradeToSign(obj.gradeToSign), gradeToExecute(obj.gradeToExecute) {}
+
+AForm &AForm::operator=(const AForm &obj) {
     if (this != &obj)
-    {
-        *this = obj;
-    }
+        this->isSigned = obj.isSigned;
     return *this;
 }
 
-AForm::AForm(const AForm &obj) : name(obj.name) ,isSigned(obj.isSigned),gradeToSign(obj.gradeToSign) ,gradeToExecute(obj.gradeToExecute){}
-
-AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute) : name(name) ,isSigned(false),gradeToSign(gradeToSign) ,gradeToExecute(gradeToExecute)
-{
+AForm::AForm(const std::string &name, int gradeToSign, int gradeToExecute)
+    : name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute) {
     if (gradeToSign < 1 || gradeToExecute < 1)
         throw GradeTooHighException();
     if (gradeToSign > 150 || gradeToExecute > 150)
         throw GradeTooLowException();
 }
-bool AForm::getIsSigned() const
-{
-    return isSigned;
-}
+ std::string AForm::getName() const { return name; }
+bool AForm::getIsSigned() const { return isSigned; }
+int AForm::getGradeToSign() const { return gradeToSign; }
+int AForm::getGradeToExecute() const { return gradeToExecute; }
 
-const std::string AForm::getName() const
-{
-    return this->name;
-}
-
-int AForm::getGradeToSign() const
-{
-    return this->gradeToSign;
-}
-
-int AForm::getGradeToExecute() const
-{
-    return this->gradeToExecute;
-}
-
-std::ostream &operator<<(std::ostream &out, const AForm &b)
-{
-    out<< "form name: "<<b.getName() <<"| grade to sign: "<< b.getGradeToSign() <<"| grade to execute: " <<b.getGradeToExecute()<< "| signature status: " <<b.getIsSigned()<<std::endl;
-    return out;
-}
-
-void AForm::beSigned(Bureaucrat ber)
-{
-    if (ber.getGrade() > gradeToExecute)
+void AForm::beSigned(const Bureaucrat &ber) {
+    if (ber.getGrade() > gradeToSign)
         throw GradeTooLowException();
-    if (ber.getGrade() >= gradeToSign && ber.getGrade() <= gradeToExecute)
-        isSigned = true;
+    isSigned = true;
 }
 
-void AForm::signForm(Bureaucrat ber)
-{
-    try
-    {
-        beSigned(ber);
-    }
-    catch(std::exception  &e)
-    {
-        std::cout<< ber.getName()<<" couldn't sign "<< getName() << " becuase "<< e.what()<<std::endl;
-        return ;
-    }
-    std::cout<<ber.getName() <<" signed "<<getName()<<std::endl;
+void AForm::execute(const Bureaucrat &executor) const {
+    if (!isSigned)
+        throw FormNotSignedException();
+    if (executor.getGrade() > gradeToExecute)
+        throw GradeTooLowException();
+    executeAction();
+}
+
+std::ostream &operator<<(std::ostream &out, const AForm &b) {
+    out << b.getName() << " (sign grade " << b.getGradeToSign()
+        << ", exec grade " << b.getGradeToExecute()
+        << ", signed: " << (b.getIsSigned() ? "yes" : "no") << ")";
+    return out;
 }

@@ -1,6 +1,7 @@
 #ifndef Bureaucrat_HPP
 #define Bureaucrat_HPP
 #include <iostream>
+#include "AForm.hpp"
 
 class GradeTooHighException : public std::exception
 {
@@ -34,6 +35,7 @@ class Bureaucrat
         std::string getName() const;
         Bureaucrat operator++(int);
         Bureaucrat operator--(int);
+        void executeForm(AForm const &form) const;
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &b);
