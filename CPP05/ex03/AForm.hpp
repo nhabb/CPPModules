@@ -6,7 +6,6 @@
 #include <exception>
 #include <fstream>
 
-// Forward declaration
 class Bureaucrat;
 
 class AForm

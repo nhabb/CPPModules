@@ -4,7 +4,7 @@
 
 class Bureaucrat
 {
-    private:
+    private
     std::string name;
     int grade;
         public:

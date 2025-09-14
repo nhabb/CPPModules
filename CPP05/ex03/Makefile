@@ -1,8 +1,8 @@
 CXX     = c++
 CXXFLAGS= -Wall -Wextra -Werror -std=c++98
 
-NAME    = Convert
-SRCS    = main.cpp ScalarConverter.cpp
+NAME    = Intern
+SRCS    = Bureaucrat.cpp main.cpp AForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 OBJS    = $(SRCS:.cpp=.o)
 
 all: $(NAME)
