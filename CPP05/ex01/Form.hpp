@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
     private:
@@ -23,7 +25,7 @@ class Form
         bool getIsSigned() const;
         int getGradeToSign() const;
         int getGradeToExecute() const;
-        void signForm(Bureaucrat ber);
+        // void signForm(Bureaucrat ber);
         void beSigned(Bureaucrat ber);
         class GradeTooLowException : public std::exception
         {

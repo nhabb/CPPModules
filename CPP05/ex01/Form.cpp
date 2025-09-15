@@ -55,16 +55,16 @@ void Form::beSigned(Bureaucrat ber)
         isSigned = true;
 }
 
-void Form::signForm(Bureaucrat ber)
-{
-    try
-    {
-        beSigned(ber);
-    }
-    catch(std::exception  &e)
-    {
-        std::cout<< ber.getName()<<" couldn't sign "<< getName() << " becuase "<< e.what()<<std::endl;
-        return ;
-    }
-    std::cout<<ber.getName() <<" signed "<<getName()<<std::endl;
-}
+// void Form::signForm(Bureaucrat ber)
+// {
+//     try
+//     {
+//         beSigned(ber);
+//     }
+//     catch(std::exception  &e)
+//     {
+//         std::cout<< ber.getName()<<" couldn't sign "<< getName() << " becuase "<< e.what()<<std::endl;
+//         return ;
+//     }
+//     std::cout<<ber.getName() <<" signed "<<getName()<<std::endl;
+// }

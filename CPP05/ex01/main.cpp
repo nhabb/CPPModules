@@ -19,12 +19,12 @@ int main()
     std::cout << f3;
     std::cout << f4;
 
-    f1.signForm(b1);
-    f2.signForm(b1);
-    f3.signForm(b3);
-    f4.signForm(b3);
-    f4.signForm(b2);
-    f1.signForm(b4);
+    b1.signForm(f1);
+    b2.signForm(f1);
+    b3.signForm(f3);
+    b4.signForm(f3);
+    b4.signForm(f2);
+    b1.signForm(f4);
 
     return 0;
 }
