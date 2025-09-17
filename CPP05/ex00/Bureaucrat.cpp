@@ -2,9 +2,8 @@
 
 Bureaucrat::Bureaucrat(): name("def"), grade(0){}
 Bureaucrat::~Bureaucrat(){}
-Bureaucrat::Bureaucrat(const Bureaucrat &obj)
+Bureaucrat::Bureaucrat(const Bureaucrat &obj) : name(obj.name)
 {
-    name = obj.name;
     grade = obj.grade;
 }
 Bureaucrat & Bureaucrat::operator=(const Bureaucrat &obj)
@@ -16,14 +15,13 @@ Bureaucrat & Bureaucrat::operator=(const Bureaucrat &obj)
     return *this;
 }
 
-Bureaucrat::Bureaucrat(std::string name,int grade)
+Bureaucrat::Bureaucrat(std::string name,int grade) : name (name)
 {
     if (grade < 1)
         throw GradeTooHighException();
     if (grade > 150)
         throw GradeTooLowException();
     this->grade = grade;
-    this->name = name;
 }
 
 int Bureaucrat::getGrade() const

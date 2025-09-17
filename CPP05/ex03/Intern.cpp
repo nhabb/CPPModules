@@ -18,35 +18,38 @@ Intern &Intern::operator=(const Intern &obj)
     return (*this);
 }
 
-int Intern::getFormType(const std::string& formName) const
+static AForm* createShrub(const std::string& target) 
 {
-    if (formName == "shrubbery creation")
-        return 0;
-    else if (formName == "robotomy request")
-        return 1;
-    else if (formName == "presidential pardon")
-        return 2;
-    else
-        return -1;
+    return new ShrubberyCreationForm(target); 
+}
+static AForm* createRobo(const std::string& target) 
+{ 
+    return new RobotomyRequestForm(target); 
+}
+static AForm* createPardon(const std::string& target) 
+{
+    return new PresidentialPardonForm(target); 
 }
 
 AForm* Intern::makeForm(const std::string formName, const std::string target)
 {
-    int formType = getFormType(formName);
-    
-    switch (formType)
+    const std::string formNames[3] = {
+        "shrubbery creation",
+        "robotomy request",
+        "presidential pardon"
+    };
+    AForm* (*creators[3])(const std::string&) = { createShrub, createRobo, createPardon };
+
+    for (int i = 0; i < 3; i++)
     {
-        case 0:
+        if (formName == formNames[i])
+        {
             std::cout << "Intern creates " << formName << std::endl;
-            return new ShrubberyCreationForm(target);
-        case 1:
-            std::cout << "Intern creates " << formName << std::endl;
-            return new RobotomyRequestForm(target);
-        case 2:
-            std::cout << "Intern creates " << formName << std::endl;
-            return new PresidentialPardonForm(target);
-        default:
-            std::cout << "Intern could not find the form: " << formName << std::endl;
-            return NULL;
+            return creators[i](target);
+        }
     }
+
+    std::cout << "Intern could not find the form: " << formName << std::endl;
+    return NULL;
 }
+

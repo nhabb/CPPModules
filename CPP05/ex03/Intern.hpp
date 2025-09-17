@@ -4,10 +4,8 @@
 
 class Intern
 {
-    private:
-        int getFormType(const std::string& formName) const;
-
     public:
+        int getFormType(const std::string& formName) const;
         Intern();
         ~Intern();
         Intern(const Intern &obj);
