@@ -1,13 +1,13 @@
 CXX     = c++
 CXXFLAGS= -Wall -Wextra -Werror -std=c++98
 
-NAME    = convert
-SRCS    = main.cpp ScalarConverter.cpp
+NAME    = identify
+SRCS    = main.cpp Base.cpp identify.cpp
 OBJS    = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) A.hpp B.hpp C.hpp identify.hpp Base.hpp
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
