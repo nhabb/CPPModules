@@ -12,7 +12,7 @@ Base* generate() {
     if (!seeded) { std::srand(static_cast<unsigned int>(std::time(0))); seeded = true; }
     int r = std::rand() % 3;
     switch (r) {
-        case 0: return new A();
+        case 0: return new A(); 
         case 1: return new B();
         default: return new C();
     }
