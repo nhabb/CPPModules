@@ -1,46 +1,54 @@
 #include <iostream>
-// #include <string>
-#include "iter.hpp"
+#include "Array.hpp"
 
-template <typename T>
-void printElem(T const &x) {
-    std::cout << x << " ";
-}
+#define MAX_VAL 750
 
-template <typename T>
-void incrementElem(T &x) {
-    x++;
-}
+int main(int, char**)
+{
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
 
-int main() {
-    // --------- int array ----------
-    int arr[] = {1, 2, 3, 4, 5};
-    std::cout << "int array before increment: ";
-    iter(arr, 5, printElem<int>);
-    std::cout << "\n";
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
-    iter(arr, 5, incrementElem<int>);
-    std::cout << "int array after increment:  ";
-    iter(arr, 5, printElem<int>);
-    std::cout << "\n\n";
-
-    // --------- const int array ----------
-    const int cArr[] = {10, 20, 30, 40};
-    std::cout << "const int array: ";
-    iter(cArr, 4, printElem<const int>);
-    std::cout << "\n\n";
-
-    // --------- string array ----------
-    std::string strs[] = {"one", "two", "three"};
-    std::cout << "string array: ";
-    iter(strs, 3, printElem<std::string>);
-    std::cout << "\n\n";
-
-    // --------- const string array ----------
-    const std::string cStrs[] = {"alpha", "beta", "gamma"};
-    std::cout << "const string array: ";
-    iter(cStrs, 3, printElem<const std::string>);
-    std::cout << "\n";
-
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;//
     return 0;
 }
