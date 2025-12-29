@@ -17,7 +17,7 @@ public:
         Arrsize = 0;
         data = NULL;
     }
-    Array(unsigned int n)
+    Array(int n)
     {
         Arrsize = n;
         data = new T[n];
@@ -57,7 +57,7 @@ public:
         return data[index];
     }
 
-    const T& operator[](unsigned int index) const 
+    const T& operator[](int index) const 
     {
        if (index < 0 || index >= Arrsize) 
             throw OutOfBoundsException();

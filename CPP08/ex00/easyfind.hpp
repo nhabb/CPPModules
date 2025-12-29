@@ -4,28 +4,23 @@
 #include <vector>
 #include <deque>
 #include <list>
+#include <algorithm>
+#include <iterator>
+#include <exception>
 
 class NumberNotFoundException : public std::exception
 {
-    virtual const char * what() const throw();
+    public:
+        virtual const char * what() const throw();
 };
 
 template <typename T>
 int easyfind(const T &v, int num)
 {
-    typename T::const_iterator it = v.begin();
-    typename T::const_iterator end = v.end();
-    int index = 0;
-
-    while (it != end)
-    {
-        if (*it == num)
-            return index;
-        ++it;
-        ++index;
-    }
-    throw NumberNotFoundException();
+    typename T::const_iterator it = std::find(v.begin(), v.end(), num);
+    if (it == v.end())
+        throw NumberNotFoundException();
+    return (std::distance(v.begin(), it));
 }
-
 
 #endif
