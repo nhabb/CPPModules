@@ -27,7 +27,6 @@ int PmergeMe::binarySearch(std::vector<int>& c, int value, int high, int& compar
 {
 	if (high >= static_cast<int>(c.size()))
 		high = c.size() - 1;
-
 	if (low > high)
 		return low;
 
@@ -40,7 +39,7 @@ int PmergeMe::binarySearch(std::vector<int>& c, int value, int high, int& compar
 		return binarySearch(c, value, mid - 1, comparisons, low);
 }
 
-void PmergeMe::replace_ref(std::vector<int>& main, std::vector<int>& pend, std::vector<int>& jacob, int& comparisons)
+void PmergeMe::replace(std::vector<int>& main, std::vector<int>& pend, std::vector<int>& jacob, int& comparisons)
 {
 	main.insert(main.begin(), pend[0]);
 	std::vector<int> inserted;
@@ -78,6 +77,15 @@ void PmergeMe::replace_ref(std::vector<int>& main, std::vector<int>& pend, std::
 		}
 		++it;
 	}
+	for (int i = 1; i < (int)pend.size(); i++)
+	{
+		if (std::find(inserted.begin(), inserted.end(), i + 1) == inserted.end())
+		{
+			searchLimit = main.size();
+			pos = binarySearch(main, pend[i], searchLimit, comparisons, 0);
+			main.insert(main.begin() + pos, pend[i]);
+		}
+	}
 }
 
 void PmergeMe::insertSort(std::vector<int>& main, std::vector<int>& pend)
@@ -95,7 +103,7 @@ void PmergeMe::insertSort(std::vector<int>& main, std::vector<int>& pend)
 		jacob_seq.push_back(j_num);
 		++i;
 	}
-	replace_ref(main, pend, jacob_seq, vectorComparisons);
+	replace(main, pend, jacob_seq, vectorComparisons);
 }
 
 std::vector<int> PmergeMe::pmergeSortRecursive(std::vector<int>& data)
@@ -173,20 +181,17 @@ int PmergeMe::binarySearch(std::deque<int>& c, int value, int high, int& compari
 {
 	if (high >= static_cast<int>(c.size()))
 		high = c.size() - 1;
-
 	if (low > high)
 		return low;
-
 	int mid = low + (high - low) / 2;
 	comparisons++;
-
 	if (c[mid] < value)
 		return binarySearch(c, value, high, comparisons, mid + 1);
 	else
 		return binarySearch(c, value, mid - 1, comparisons, low);
 }
 
-void PmergeMe::replace_ref(std::deque<int>& main, std::deque<int>& pend, std::deque<int>& jacob, int& comparisons)
+void PmergeMe::replace(std::deque<int>& main, std::deque<int>& pend, std::deque<int>& jacob, int& comparisons)
 {
 	main.insert(main.begin(), pend[0]);
 	std::vector<int> inserted;
@@ -224,6 +229,16 @@ void PmergeMe::replace_ref(std::deque<int>& main, std::deque<int>& pend, std::de
 		}
 		++it;
 	}
+
+	for (int i = 1; i < (int)pend.size(); i++)
+	{
+		if (std::find(inserted.begin(), inserted.end(), i + 1) == inserted.end())
+		{
+			searchLimit = main.size();
+			pos = binarySearch(main, pend[i], searchLimit, comparisons, 0);
+			main.insert(main.begin() + pos, pend[i]);
+		}
+	}
 }
 
 void PmergeMe::insertSort(std::deque<int>& main, std::deque<int>& pend)
@@ -241,7 +256,7 @@ void PmergeMe::insertSort(std::deque<int>& main, std::deque<int>& pend)
 		jacob_seq.push_back(j_num);
 		++i;
 	}
-	replace_ref(main, pend, jacob_seq, dequeComparisons);
+	replace(main, pend, jacob_seq, dequeComparisons);
 }
 
 std::deque<int> PmergeMe::pmergeSortRecursive(std::deque<int>& data)

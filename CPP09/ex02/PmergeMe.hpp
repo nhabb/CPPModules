@@ -29,20 +29,17 @@ class PmergeMe
 		bool parseInput(char *arg);
 		void printVector();
 		bool isDup();
-		int binarySearch(int lo, int hi, int target);
 
-	//----------------------------------------------------------------------vector----------------------------------------------------------------------
 		void fordJohnsonSort(std::vector<int>& container);
 		std::vector<int> pmergeSortRecursive(std::vector<int>& data);
 		void insertSort(std::vector<int>& main, std::vector<int>& pend);
-		void replace_ref(std::vector<int>& main, std::vector<int>& pend, std::vector<int>& jacob, int& comparisons);
+		void replace(std::vector<int>& main, std::vector<int>& pend, std::vector<int>& jacob, int& comparisons);
 		int binarySearch(std::vector<int>& c, int value, int high, int& comparisons, int low);
 
-	//----------------------------------------------------------------------deque----------------------------------------------------------------------
 		void fordJohnsonSort(std::deque<int>& container);
 		std::deque<int> pmergeSortRecursive(std::deque<int>& data);
 		void insertSort(std::deque<int>& main, std::deque<int>& pend);
-		void replace_ref(std::deque<int>& main, std::deque<int>& pend, std::deque<int>& jacob, int& comparisons);
+		void replace(std::deque<int>& main, std::deque<int>& pend, std::deque<int>& jacob, int& comparisons);
 		int binarySearch(std::deque<int>& c, int value, int high, int& comparisons, int low);
 
 		void printContainer(const std::vector<int>& container);
